@@ -1,14 +1,39 @@
 from django.contrib import admin
+from accounts.models import LinkedinUser,Education,ProfessionalExperience,Job,Events
 
-from django.contrib import admin
-from accounts.models import MyUser
-
-class MyuserAdmin(admin.ModelAdmin):
+class LinkedinUserAdmin(admin.ModelAdmin):
     
     list_display = ('username',)
     search_fields = ('username',)
     
-admin.site.register(MyUser,MyuserAdmin)
+class EducationAdmin(admin.ModelAdmin):
+    
+    list_display = ('degreename','user')
+    search_fields = ('degreename','user')
+    
+class ProfessionalExperienceAdmin(admin.ModelAdmin):
+    
+    list_display = ('role',)
+    search_fields = ('role','company')
+    
+class JobAdmin(admin.ModelAdmin):
+    
+    list_display = ('title',)
+    search_fields = ('title',)
+    
+class EventsAdmin(admin.ModelAdmin):
+    
+    list_display = ('title',)
+    search_fields = ('title',)
+    
+
+
+    
+admin.site.register(LinkedinUser,LinkedinUserAdmin)
+admin.site.register(Education,EducationAdmin)
+admin.site.register(ProfessionalExperience,ProfessionalExperienceAdmin)
+admin.site.register(Job,JobAdmin)
+admin.site.register(Events,EventsAdmin)
     
 # Register your models here.
 

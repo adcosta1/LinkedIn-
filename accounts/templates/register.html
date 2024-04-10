@@ -1,0 +1,29 @@
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="{% static "style/register.css" %}">
+
+
+</head>
+<body>
+  <div class="login-page">
+    <div class="form">
+      <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type='submit'>Register</button>
+      </form>
+      
+      <p class="message">Already registered? <a href="{% url "Login_view" %}">Sign In</a></p>
+    </div>
+  </div>
+  
+  
+</body>
+</html>
+{% endblock %}
