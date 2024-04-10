@@ -1,5 +1,7 @@
 from django.contrib import admin
-from accounts.models import LinkedinUser,Education,ProfessionalExperience,Job,Events
+from accounts.models import LinkedinUser,Education,ProfessionalExperience
+from jobs.models import Job
+from events.models import Events
 
 class LinkedinUserAdmin(admin.ModelAdmin):
     

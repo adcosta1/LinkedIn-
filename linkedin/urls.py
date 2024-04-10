@@ -17,13 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from accounts.views import Login_view,Register_view
+from events.views import EventsView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',Login_view.as_view(),name="Login_view"),
-    path('register/',Register_view.as_view(),name="Register_view"),
+    path('login/',Login_view.as_view(),name="LoginView"),
+    path('register/',Register_view.as_view(),name="RegisterView"),
+    path('events/',EventsView.as_view(),name="EventsView"),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

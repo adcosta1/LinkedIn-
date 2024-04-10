@@ -8,6 +8,8 @@ class LinkedinUser(User):
     STATE_CHOICES = []
     for state in pycountry.subdivisions.get(country_code='US'):
         STATE_CHOICES.append((state.code, state.name))
+        
+    CATEGORY_CHOICES=[('Tech','Tech'),('Advocacy','Advocacy'),('Medicine','Medicine'),('Engineering','Engineering'),('Humans','Humans'),('Math','Math')]
     
     
     gender = models.CharField(max_length=10, choices= (("Men", "Men"), ("Woman", "Woman"), ("Non","I prefer not to identify")))
@@ -15,6 +17,7 @@ class LinkedinUser(User):
     DOB = models.DateField()
     Race = models.CharField(max_length=10, choices=(("B", "Black"), ("W", "White"), ("N", "Native"), ("A","Asian"), ("O", "Other")))
     Bio = models.CharField(max_length=500)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES,null=True,blank=True)
     
     
 class Education(models.Model):
@@ -32,19 +35,9 @@ class ProfessionalExperience(models.Model):
     company_name = models.CharField(max_length=30)
     description = models.CharField(max_length=300)
     
-class Job(models.Model):
-    id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=30, null=True,blank=True)
-    description = models.CharField(max_length=300)
-    postedby = models.ForeignKey(LinkedinUser, on_delete=models.CASCADE)
-    deadline_date = models.DateField(auto_now=False)
+
     
-class Events(models.Model):
-    id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=30, null=True,blank=True)
-    description = models.CharField(max_length=500)
-    date = models.DateField(auto_now=False)
-    organizer = models.ForeignKey(LinkedinUser, on_delete=models.CASCADE)
+
     
     
     

@@ -29,7 +29,7 @@ class Register_view(View):
         print(form.is_valid())
         if form.is_valid():
             form.save()
-            return redirect('Login_view')
+            return redirect('LoginView')
 
         return render(request, 'register.html', {'form': form})
         
