@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
 from django.contrib.auth import authenticate,login
 from accounts.forms import CreateuserForm
+from accounts.models import LinkedinUser
 
 class Login_view(View):
     def get(self,request):
@@ -16,7 +16,8 @@ class Login_view(View):
         
         if user != None:
             login(request,user)
-            return redirect("events")
+            return redirect("EventsView")
+        return render(request,'login.html',{})
         
         
 class Register_view(View):
@@ -25,13 +26,20 @@ class Register_view(View):
         return render(request, 'register.html', {'form': form})
 
     def post(self, request):
-        form = CreateuserForm(request.POST)
+        form = CreateuserForm(request.POST,request.FILES)
         print(form.is_valid())
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.photo = request.FILES['photo']
+            user.save()
             return redirect('LoginView')
 
         return render(request, 'register.html', {'form': form})
         
         
         
+class ConnectionsView(View):
+    def get(self,request):
+        user = get_object_or_404(LinkedinUser, username= request.user.username)
+        connections = LinkedinUser.objects.filter(state=user.state,category = user.category)
+        return render(request, 'connections.html', {'connections':connections})

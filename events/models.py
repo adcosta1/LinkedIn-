@@ -8,5 +8,8 @@ class Events(models.Model):
     title = models.CharField(max_length=30, null=True,blank=True)
     description = models.CharField(max_length=500)
     date = models.DateField(auto_now=False)
-    organizer = models.ForeignKey(LinkedinUser, on_delete=models.CASCADE)
+    organizer = models.ForeignKey(LinkedinUser,on_delete=models.CASCADE,null=True,blank=True)
+    photo = models.ImageField(upload_to='static/media',null=True,blank=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES,null=True,blank=True)
+    
+    

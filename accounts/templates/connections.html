@@ -1,0 +1,230 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,
+	initial-scale=1.0">
+	<title>feeds an complete social media site</title>
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+		  
+	<link rel="stylesheet" href="{% static "style/events.css" %}">
+</head>
+<body>
+	<nav>
+		<div class="container">
+			<h2 class="logo">
+				feeds
+			</h2>
+			<div class="search-bar">
+				<i class="uil uil-search"></i>
+				<input type="search" placeholder="Seacrch for creators,">				
+			</div>
+			<div class="create">
+				<label class="btn btn-primary" for="create-post">Create</label>
+				<div class="profile-photo">
+					<img src="{{request.user.linkedinuser.photo.url}}">
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!------------------------------ MAIN ------------------------------>
+	<main>
+		<div class="container">
+      <!--===================== LEFT =====================-->
+      <div class="left">
+        <a class="profile">
+					<div class="profile-photo">
+						<img src="{{request.user.linkedinuser.photo.url}}">
+					
+					</div>
+					<div class="handle">
+						<h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
+						<p class="text-muted">
+							@{{request.user.username}}
+						</p>
+					</div>
+				</a>
+        <!--===================== SIDEBAR =====================-->
+        <div class="sidebar">
+          <a class="menu-item " href="{% url "ConnectionsView" %}"> 
+            <span><i class="uil uil-home"></i></span> <h3>Home</h3>
+          </a>
+          <a class="menu-item " href="{% url "EventsView" %}"> 
+            <span><i class="uil uil-compass"></i></span> <h3>Events</h3>
+          </a>
+          
+          <a class="menu-item" id="messages-notifications" href="{% url "JobsView" %}">
+            <span><i class="uil uil-envelope-alt"></i></span> <h3>Jobs</h3>
+          </a>
+          <a class="menu-item active " href="{% url "ConnectionsView" %}">
+            <span><i class="uil uil-bookmark"></i></span> <h3>Connections</h3>
+          </a>
+          
+        </div>
+      <!--===================== END OF SIDEBAR =====================-->  
+        {% comment %} <label for="create-post" class="btn btn-primary">Create Post</label> {% endcomment %}
+      </div>
+      <!--===================== END OF LEFT =====================-->  
+      
+    
+      
+      <!--===================== MIDDLE =====================-->
+      <div class="middle">
+        <div class="search-bar">
+          <i class="uil uil-search"></i>
+          <input type="search" placeholder="Seacrch for creators,">				
+        </div>
+        
+       <!--===================== FEEDS =====================--> 
+        
+        <div class="feeds">
+           <!--===================== FEED 1st =====================--> 
+           {% for event in events %}
+           <div class="feed">
+               <div class="head">
+                   <div class="user">
+                       <div class="profile-photo">
+                           <img src="{{event.organizer.photo.url}}">
+                        </div>
+                        <div class="info">
+                            <h3>{{event.organizer.first_name}} {{event.organizer.last_name}}</h3>
+                            <small>Chennai, {{event.date}}</small>
+                        </div>
+                    </div>
+                    <span class="edit">
+                        <i class="uil uil-ellipsis-h"></i>
+                    </span>
+                </div>
+                
+                <div class="photo">
+                    <img src="{{event.photo.url}}">
+                </div>
+                {% comment %} <div class="action-buttons">
+                    <div class="interaction-buttons">
+                        <span><i class="uil uil-heart"></i></span>
+                        <span><i class="uil uil-comment-dots"></i></span>
+                        <span><i class="uil uil-share-alt"></i></span>
+                    </div>
+                    <div class="bookmark">
+                        <span><i class="uil uil-bookmark-full"></i></span>
+                    </div>
+                </div> {% endcomment %}
+                {% comment %} <div class="liked-by">
+                    <span><img src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"></img></span>
+                    <span><img src="https://i.pinimg.com/736x/63/f9/d5/63f9d5fd5f34c8544a31c22c3e909cec.jpg"></img></span>
+                    <span><img src="https://i.pinimg.com/736x/5c/9a/26/5c9a26142b76c133b10f52e30c05f896.jpg"></img></span>
+                    <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7H83HzQA3YuxLyppT3fksUmoz5xJ66g_t5KeNPEWMCqS_5EERSvjKxtS5BpkT9scRLGQ&usqp=CAU"></img></span>
+                    <p>Liked by <b>Kavita</b> and <b>2,312 others</b></p>
+                </div> {% endcomment %}
+                <div class="caption">
+                    <p><b>{{event.organizer.username}} </b>{{event.description}} <span class="hash-tag">#{{event.category}}</span></p>
+                </div>
+                {% comment %} <div class="comments text-muted">View all 277 comments</div> {% endcomment %}
+            </div>
+            {% endfor %}
+             
+        </div>
+             <!--===================== END OF FEEDS =====================-->    
+      </div>
+      <!--===================== END OF MIDDLE =====================--> 
+
+
+
+       {% comment %} <!--===================== RIGHT =====================-->
+      <div class="right">
+        <div class="messages">
+          <div class="heading">
+            <h4>Message</h4><i class="uil uil-edit"></i>
+          </div>
+      <!--===================== SEARCH BAR =====================--> 
+          <div class="search-bar">
+            <i class="uil uil-search"></i>
+            <input type="search" placeholder="Search messages" id="message-search">
+          </div>
+       <!--===================== MESSAGES CATEGORY =====================-->  
+          <div class="category">
+            <h6 class="active">Primary</h6>
+            <h6>General</h6>
+            <h6 class="message-requests">Request(7)</h6>
+          </div>
+          <!------------------ MESSAGE ---------------------->
+          <div class="message">
+            <div class="profile-photo">
+              <img src="https://www.stepstherapy.com.au/wp-content/uploads/2018/10/Yazmin-profile-picture-square.jpg">
+            </div>
+            <div class="message-body">
+              <h5>Yazmin</h5>
+              <p class="text-muted">Just free now to talk babe!...</p>
+            </div>
+          </div>
+          <!------------------ MESSAGE ---------------------->
+          <div class="message">
+            <div class="profile-photo">
+              <img src="https://i.pinimg.com/originals/54/74/8d/54748de2a9fa0951d2e81b1ffbbd189c.jpg">
+            </div>
+            <div class="message-body">
+              <h5>Shravni</h5>
+              <p class="text-bold">Hey bro what are you doing?</p>
+            </div>
+          </div>
+          <!------------------ MESSAGE ---------------------->
+          <div class="message">
+            <div class="profile-photo">
+              <img src="https://viterbischool.usc.edu/wp-content/uploads/2020/05/Lily-Profile-Square.jpeg">
+            </div>
+            <div class="message-body">
+              <h5>Svetlana</h5>
+              <p class="text-muted">How are you? my dear!!!</p>
+            </div>
+          </div>
+          <!------------------ MESSAGE ---------------------->
+          <div class="message">
+            <div class="profile-photo">
+              <img src="https://www.voxco.com/wp-content/uploads/2020/05/sumit-square-profile.jpg">
+              <div class="active"></div>
+            </div>
+            <div class="message-body">
+              <h5>Bill</h5>
+              <p class="text-bold">Hii... What's up dude!!!!</p>
+            </div>
+          </div>
+        </div>
+         <!------------------ END OF MESSAGE ---------------------->
+   
+        
+        
+         <!------------------ FRIEND REQUESTS ---------------------->
+        <div class="friend-requests">
+          <h4>Requests</h4>
+          <div class="request">
+            <div class="info">
+              <div class="profile-photo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIEs8bQoMxE_6avxahksqI7L95Eh7WAZEVp8T32WkHIk_SCtnWWs2lA1GsfZ8vIVy8huI&usqp=CAU">
+              </div>
+              <div>
+                <h5>Samiksha Sinha</h5>
+                <p class="text-muted">
+                  5 mutual friends
+                </p>
+                <div class="action">
+                  <button class="btn btn-primary">
+                    Accept
+                  </button>
+                  <button class="btn">
+                    Decline
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> {% endcomment %}
+      </div>
+    </div>
+	</main>
+</body>
+</html>
+                                                  
+{% endblock content %}
