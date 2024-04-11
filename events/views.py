@@ -1,10 +1,15 @@
 from django.shortcuts import render,get_object_or_404
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from events.models import Events
 from accounts.models import LinkedinUser
 from events.forms import CreateEventForm
 
-class EventsView(View):
+class EventsView(LoginRequiredMixin,View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+    
     def get(self,request):
         user = get_object_or_404(LinkedinUser, username=request.user.username )
         print(user)

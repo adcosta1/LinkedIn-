@@ -4,7 +4,7 @@
 	--color-white: hsl(252, 30%, 100%);
 	--color-light: hsl(268, 9%, 94%);
 	--color-gray: hsl(252, 15%, 65%);
-	--color-primary: hsl(252, 78%, 60%);
+	--color-primary: rgba(0,51,160,255);
 	--color-secondary: hsl(263, 55%, 89%);
 	--color-success: hsl(120, 95%, 65%);
 	--color-danger: hsl(0, 95%, 65%);
@@ -500,4 +500,9 @@ main .container .right {
 .form-group{
     display: flex;
     flex-direction: column;
+}
+.create-post input{
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 10px;
 }

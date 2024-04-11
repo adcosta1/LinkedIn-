@@ -1,9 +1,29 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
+:root{
+	--color-white: hsl(252, 30%, 100%);
+	--color-light: hsl(268, 9%, 94%);
+	--color-gray: hsl(252, 15%, 65%);
+	--color-primary: hsl(252, 78%, 60%);
+	--color-secondary: hsl(263, 55%, 89%);
+	--color-success: hsl(120, 95%, 65%);
+	--color-danger: hsl(0, 95%, 65%);
+	--color-dark: hsl(252, 30%, 17%);
+	--color-black: hsl(270, 0%, 0%);
+	
+	--border-radius: 2rem;
+	--card-border-radius: 1rem;
+	--btn-padding: 0.6rem 2rem;
+	--search-padding: 0.6rem 1rem;
+	--card-padding: 1rem;
+	
+	--sticky-top-left: 5.4rem;
+	--sticky-top-right: -18rem;
+}
 .login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
+  border-radius: 20px;
 }
 .form {
   position: relative;
@@ -14,6 +34,7 @@
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 20px;
 }
 .form input {
   font-family: "Roboto", sans-serif;
@@ -49,10 +70,16 @@
   font-size: 12px;
 }
 .form .message a {
-  color: #4CAF50;
+  color:  rgba(0,51,160,255);
   text-decoration: none;
 }
-
+.form .register-form {
+  display: none;
+}
+.form img{
+  width: 300px;
+  height: 200px;
+}
 .container {
   position: relative;
   z-index: 1;
@@ -87,10 +114,30 @@
   color: #EF3B3A;
 }
 body {
-  background: #76b852; /* fallback for old browsers */
-  background: rgb(141,194,111);
-  background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+
+  background: hsl(268, 9%, 94%);;
+
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
+}
+
+.btn {
+	display: inline-block;
+	padding: var(--btn-padding);
+	font-weight: 500;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	transition: all 300ms ease;
+	font-size: 0.9rem;
+  background:rgba(0,51,160,255) !important;
+}
+
+.btn:hover {
+	opacity: 0.8;
+}
+
+.btn-primary {
+	background: hsl(252, 78%, 60%);
+	color: white;	
 }

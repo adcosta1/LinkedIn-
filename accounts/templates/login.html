@@ -5,18 +5,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Login - Ana`s Linkedin</title>
   <link rel="stylesheet" href="{% static "style/login.css" %}">
 
 </head>
 <body>
   <div class="login-page">
     <div class="form">
+      <img src="{% static "media/georgia-logo.jpg" %}">
       <form class="login-form"method="POST">
         {% csrf_token %}
         <input type="text" name="username" placeholder="username"/>
         <input type="password" name="password" placeholder="password"/>
-        <button>login</button>
+        <button class="btn btn-primary">login</button>
         <p class="message">Not registered? <a href="{% url "RegisterView" %}">Create an account</a></p>
       </form>
     </div>

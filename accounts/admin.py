@@ -10,8 +10,8 @@ class LinkedinUserAdmin(admin.ModelAdmin):
     
 class EducationAdmin(admin.ModelAdmin):
     
-    list_display = ('degreename','user')
-    search_fields = ('degreename','user')
+    list_display = ('degreename','userid')
+    search_fields = ('degreename','userid')
     
 class ProfessionalExperienceAdmin(admin.ModelAdmin):
     

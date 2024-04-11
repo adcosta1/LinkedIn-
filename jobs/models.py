@@ -3,6 +3,7 @@ from accounts.models import LinkedinUser
 import pycountry
 
 class Job(models.Model):
+    from accounts.models import LinkedinUser
     CATEGORY_CHOICES=[('Tech','Tech'),('Advocacy','Advocacy'),('Medicine','Medicine'),('Engineering','Engineering'),('Humans','Humans'),('Math','Math')]
     STATE_CHOICES = []
     for state in pycountry.subdivisions.get(country_code='US'):
@@ -17,3 +18,4 @@ class Job(models.Model):
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES,null=True,blank=True)
     link = models.URLField(null=True,blank=True)
     state = models.CharField(max_length=5, choices=STATE_CHOICES, null=True,blank=True)
+    

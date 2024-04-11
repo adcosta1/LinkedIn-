@@ -3,9 +3,13 @@ from django.views import View
 from jobs.models import Job
 from jobs.forms import PublishJobForm
 from accounts.models import LinkedinUser
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
-class JobsView(View):
+class JobsView(LoginRequiredMixin,View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+    
     def get(self,request):
           
         user = get_object_or_404(LinkedinUser, username= request.user.username )

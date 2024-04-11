@@ -1,0 +1,109 @@
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Ana`s Linkedin</title>
+  <link rel="stylesheet" href="{% static "style/myprofile.css" %}">
+
+</head>
+<body>
+   
+  <div class="sttngs">
+    <h2>SETTINGS</h2>
+<div class="tabordion">
+  <section id="section1">
+    <input class="t" type="radio" name="sections" id="option1" checked>
+    <label for="option1" class="trr"> Account</label>
+    <article>
+  
+    <div class="frm">     
+        <form method-"post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{form.as_p}}
+          <button type="submit">Update profile</button>
+        </form>
+
+  
+      
+   
+</div>
+  
+  
+  </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  $("document").ready(function () {
+
+    var textmax=500;
+   
+    $("#count").text(textmax + ' character left');
+    
+    $("#bio").keyup(function(){
+        
+        var userlenght= $("#bio").val().length;
+        
+        var remain= textmax - userlenght ;
+
+        $("#count").text(remain + ' characters left');
+        
+    });
+    
+});
+
+
+
+
+
+document.getElementById('getval').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("getval").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('profile-upload').style.backgroundImage = "url(" + reader.result + ")";        
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
+
+
+
+
+
+
+
+
+
+$(function () {
+  var $text = $('#texte');
+  var $input = $('.texte');
+  $input.on('keydown', function () {
+    setTimeout(function () {
+      $text.html($input.val());
+    }, 0);
+  });
+})
+</script>
+  
+</body>
+</html>
+{%endblock%}

@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,
 	initial-scale=1.0">
-	<title>feeds an complete social media site</title>
+	<title>Ana`s Linkedin</title>
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 		  
 	<link rel="stylesheet" href="{% static "style/events.css" %}">
@@ -15,15 +15,18 @@
 <body>
 	<nav>
 		<div class="container">
+
 			<h2 class="logo">
-				feeds
+				Ana`s Linkedin
 			</h2>
 			<div class="search-bar">
 				<i class="uil uil-search"></i>
 				<input type="search" placeholder="Seacrch for creators,">				
 			</div>
 			<div class="create">
-				<label class="btn btn-primary" for="create-post">Create</label>
+				<a href="{% url "LoginView" %}">
+          <label class="btn btn-primary" for="create-post">Logout</label>
+        </a>
 				<div class="profile-photo">
 					<img src="{{request.user.linkedinuser.photo.url}}">
 				</div>
@@ -126,7 +129,7 @@
                     <p>Liked by <b>Kavita</b> and <b>2,312 others</b></p>
                 </div> {% endcomment %}
                 <div class="caption">
-                    <p><b>{{job.postedby.username}} </b>{{job.description}} <span class="hash-tag">#{{job.category}}</span></p>
+                    <p><b>@{{job.postedby.username}}: </b>{{job.description}} <span class="hash-tag">#{{job.category}}</span></p>
                     <a href="{{job.link}}">
                       <p><strong>Link: {{job.link}}</strong></p>
                     </a>

@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,
 	initial-scale=1.0">
-	<title>feeds an complete social media site</title>
+	<title>Ana`s Linkedin</title>
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 		  
 	<link rel="stylesheet" href="{% static "style/events.css" %}">
@@ -16,14 +16,16 @@
 	<nav>
 		<div class="container">
 			<h2 class="logo">
-				feeds
+				Ana`s Linkedin
 			</h2>
 			<div class="search-bar">
 				<i class="uil uil-search"></i>
 				<input type="search" placeholder="Seacrch for creators,">				
 			</div>
 			<div class="create">
-				<label class="btn btn-primary" for="create-post">Create</label>
+        <a href="{% url "LoginView" %}">
+          <label class="btn btn-primary" for="create-post">Logout</label>
+        </a>
 				<div class="profile-photo">
 					<img src="{{request.user.linkedinuser.photo.url}}">
 				</div>
@@ -35,17 +37,20 @@
 		<div class="container">
       <!--===================== LEFT =====================-->
       <div class="left">
-        <a class="profile">
-					<div class="profile-photo">
-						<img src="{{request.user.linkedinuser.photo.url}}">
-					
-					</div>
-					<div class="handle">
-						<h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
-						<p class="text-muted">
-							@{{request.user.username}}
-						</p>
-					</div>
+        <a class="profile" href="{% url 'MyProfileView' pk=request.user.pk %}">
+
+
+          <div class="profile-photo">
+            <img src="{{request.user.linkedinuser.photo.url}}">
+          
+          </div>
+          <div class="handle">
+            <h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
+            <p class="text-muted">
+              @{{request.user.username}}
+            </p>
+          </div>
+
 				</a>
         <!--===================== SIDEBAR =====================-->
         <div class="sidebar">
@@ -82,16 +87,21 @@
         
         <div class="feeds">
            <!--===================== FEED 1st =====================--> 
-           {% for event in events %}
+           {% for user in users %}
            <div class="feed">
                <div class="head">
                    <div class="user">
                        <div class="profile-photo">
-                           <img src="{{event.organizer.photo.url}}">
+                           <img src="{{user.photo.url}}">
                         </div>
                         <div class="info">
-                            <h3>{{event.organizer.first_name}} {{event.organizer.last_name}}</h3>
-                            <small>Chennai, {{event.date}}</small>
+                            <h3>{{user.first_name}} {{user.last_name}}</h3>
+                            <small> <strong>Loc:</strong> {{user.state}} {{event.date}}</small>
+                            <p> <strong>Education: </strong> {{user.education.degreename}}, {{user.education.institutionname}},{{user.education.graduationyear}}</p>
+                            <p> <strong>Experience: </strong> {{user.experience.role}} at {{user.experience.company_name}}</p>
+                            <p> <strong>Category: </strong> {{user.category}}<p>
+                              <br>
+                             <button type="submit" class="btn btn-primary" value="connect">Connect</button>
                         </div>
                     </div>
                     <span class="edit">
@@ -99,9 +109,7 @@
                     </span>
                 </div>
                 
-                <div class="photo">
-                    <img src="{{event.photo.url}}">
-                </div>
+                
                 {% comment %} <div class="action-buttons">
                     <div class="interaction-buttons">
                         <span><i class="uil uil-heart"></i></span>
@@ -119,9 +127,7 @@
                     <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7H83HzQA3YuxLyppT3fksUmoz5xJ66g_t5KeNPEWMCqS_5EERSvjKxtS5BpkT9scRLGQ&usqp=CAU"></img></span>
                     <p>Liked by <b>Kavita</b> and <b>2,312 others</b></p>
                 </div> {% endcomment %}
-                <div class="caption">
-                    <p><b>{{event.organizer.username}} </b>{{event.description}} <span class="hash-tag">#{{event.category}}</span></p>
-                </div>
+                
                 {% comment %} <div class="comments text-muted">View all 277 comments</div> {% endcomment %}
             </div>
             {% endfor %}
