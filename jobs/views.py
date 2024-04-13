@@ -1,9 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from django.views import View
+from django.views.generic import DeleteView
 from jobs.models import Job
 from jobs.forms import PublishJobForm
 from accounts.models import LinkedinUser
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
+from django.urls import reverse_lazy
 
 # Create your views here.
 class JobsView(LoginRequiredMixin,View):
@@ -13,9 +16,11 @@ class JobsView(LoginRequiredMixin,View):
     def get(self,request):
           
         user = get_object_or_404(LinkedinUser, username= request.user.username )
-        job = Job.objects.filter(category=user.category)
+        search = Q(Q(category=user.category))
+        jobs = Job.objects.filter(search)
+
         form = PublishJobForm()
-        return render(request, 'jobs.html',{'jobs':job, 'form':form})
+        return render(request, 'jobs.html',{'jobs':jobs, 'form':form})
     
     def post(self,request):
         form = PublishJobForm(request.POST, request.FILES)
@@ -23,8 +28,16 @@ class JobsView(LoginRequiredMixin,View):
             job = form.save()
             job.postedby = get_object_or_404(LinkedinUser, username= request.user.username)
             job.save()
-            
+        
         user = get_object_or_404(LinkedinUser, username= request.user.username )
-        job = Job.objects.filter(category=user.category, state= user.state)
+        search = Q(Q(category=user.category))
+        jobs = Job.objects.filter(search)
         form = PublishJobForm()
-        return render(request, 'jobs.html',{'jobs':job, 'form':form})
+        return render(request, 'jobs.html',{'jobs':jobs, 'form':form})
+    
+class DeleteJobView(View):
+    def post(self, request, *args, **kwargs):
+        job_id = kwargs['pk']
+        job = Job.objects.get(pk=job_id)
+        job.delete()
+        return redirect('JobsView') 

@@ -20,7 +20,7 @@
 			</h2>
 			<div class="search-bar">
 				<i class="uil uil-search"></i>
-				<input type="search" placeholder="Seacrch for creators,">				
+				<input type="search" placeholder="Seacrch for someone...">				
 			</div>
 			<div class="create">
         <a href="{% url "LoginView" %}">
@@ -54,9 +54,6 @@
 				</a>
         <!--===================== SIDEBAR =====================-->
         <div class="sidebar">
-          <a class="menu-item " href="{% url "ConnectionsView" %}"> 
-            <span><i class="uil uil-home"></i></span> <h3>Home</h3>
-          </a>
           <a class="menu-item " href="{% url "EventsView" %}"> 
             <span><i class="uil uil-compass"></i></span> <h3>Events</h3>
           </a>
@@ -78,10 +75,7 @@
       
       <!--===================== MIDDLE =====================-->
       <div class="middle">
-        <div class="search-bar">
-          <i class="uil uil-search"></i>
-          <input type="search" placeholder="Seacrch for creators,">				
-        </div>
+
         
        <!--===================== FEEDS =====================--> 
         
@@ -101,7 +95,7 @@
                             <p> <strong>Experience: </strong> {{user.experience.role}} at {{user.experience.company_name}}</p>
                             <p> <strong>Category: </strong> {{user.category}}<p>
                               <br>
-                             <button type="submit" class="btn btn-primary" value="connect">Connect</button>
+                             <button type="submit" class="btn btn-primary connect" value="connect">Connect</button>
                         </div>
                     </div>
                     <span class="edit">
@@ -230,6 +224,22 @@
       </div>
     </div>
 	</main>
+
+  <script>
+    var connectBtn = document.getElementsByClassName('connect');
+    for(var i=0;i<connectBtn.length;i++){
+      connectBtn[i].addEventListener('click',function(){
+        if(this.innerHTML == 'Connect'){
+          this.innerHTML = 'Connected';
+          this.style.backgroundColor = 'green';
+        }
+        else{
+          this.innerHTML = 'Connect';
+          this.style.backgroundColor = 'rgba(0,51,160,255)';
+        }
+      })
+    }
+  </script>
 </body>
 </html>
                                                   

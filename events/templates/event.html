@@ -18,10 +18,12 @@
 			<h2 class="logo">
 				Ana`s Linkedin
 			</h2>
-			<div class="search-bar">
-				<i class="uil uil-search"></i>
-				<input type="search" placeholder="Seacrch for creators,">				
-			</div>
+      <form method="GET" action="{% url 'ConnectionsSearchView' %}">
+        <div class="search-bar">
+          <i class="uil uil-search"></i>
+          <input type="search" name="search" placeholder="Search for someone..." />		
+		  	</div>  
+      </form>	
 			<div class="create">
 				<a href="{% url "LoginView" %}">
           <label class="btn btn-primary" for="create-post">Logout</label>
@@ -36,8 +38,8 @@
 	<main>
 		<div class="container">
       <!--===================== LEFT =====================-->
-      <a class="profile" href="{% url 'MyProfileView' pk=request.user.pk %}">
-        <a class="profile">
+      <div class="left">
+        <a class="profile" href="{% url 'MyProfileView' pk=request.user.pk %}">
 					<div class="profile-photo">
 						<img src="{{request.user.linkedinuser.photo.url}}">
 					
@@ -51,9 +53,7 @@
 				</a>
         <!--===================== SIDEBAR =====================-->
         <div class="sidebar">
-          <a class="menu-item " href="{% url "ConnectionsView" %}"> 
-            <span><i class="uil uil-home"></i></span> <h3>Home</h3>
-          </a>
+          
           <a class="menu-item active" href="{% url "EventsView" %}"> 
             <span><i class="uil uil-compass"></i></span> <h3>Events</h3>
           </a>
@@ -103,7 +103,11 @@
                         </div>
                     </div>
                     <span class="edit">
-                        <i class="uil uil-ellipsis-h"></i>
+                      <i class="uil uil-ellipsis-h">
+                        {% if request.user.username == event.organizer.username %}
+                          <a href="#" class="delete-event" data-event-id="{{ event.pk }}">Delete</a>
+                        {% endif %}
+                      </i>
                     </span>
                 </div>
                 
@@ -232,6 +236,42 @@
       </div>
     </div>
 	</main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      const deleteLinks = document.querySelectorAll('.delete-event');
+    
+
+      deleteLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+          event.preventDefault(); 
+    
+          const eventId = this.getAttribute('data-event-id');
+          
+
+          fetch(`/DeleteEvent/${eventId}/`, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}', 
+            },
+          })
+          .then(response => {
+            if (response.ok) {
+
+              location.reload();
+            } else {
+
+              console.error('Erro ao excluir o Evento.');
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao enviar a requisição POST:', error);
+          });
+        });
+      });
+    });
+    </script>
 </body>
 </html>
                                                   

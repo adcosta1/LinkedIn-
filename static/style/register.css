@@ -20,7 +20,7 @@
 	--sticky-top-right: -18rem;
 }
 .login-page {
-  width: 360px;
+
   padding: 8% 0 0;
   margin: auto;
   border-radius: 20px;
@@ -29,9 +29,10 @@
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 360px;
+  max-width: 500px;
   margin: 0 auto 100px;
   padding: 45px;
+  padding-top: 0px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 20px;
@@ -140,4 +141,23 @@ body {
 .btn-primary {
 	background: hsl(252, 78%, 60%);
 	color: white;	
+}
+.form-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.form-row div {
+  flex: 1;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.column {
+  margin: 10px;
 }

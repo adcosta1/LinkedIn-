@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from accounts.views import Login_view,Register_view,ConnectionsView,AddEducationView,AddProfessionalExperienceView,MyProfileUpdateView
-from jobs.views import JobsView
-from events.views import EventsView
+from accounts.views import Login_view,Register_view,ConnectionsView,AddEducationView,AddProfessionalExperienceView,MyProfileUpdateView,ConnectionsSearchView
+from jobs.views import JobsView, DeleteJobView
+from events.views import EventsView, DeleteEventView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -33,6 +33,9 @@ urlpatterns = [
     path('connections/',ConnectionsView.as_view(),name="ConnectionsView"),
     path('addeducation/',AddEducationView.as_view(),name="AddEducationView"),
     path('addexperience/',AddProfessionalExperienceView.as_view(),name="AddExperienceView"),
+    path('ConnectionsSearchView/',ConnectionsSearchView.as_view(),name="ConnectionsSearchView"),
+    path('DeleteJob/<int:pk>/',DeleteJobView.as_view(),name="DeleteJobView"),
+    path('DeleteEvent/<int:pk>/',DeleteEventView.as_view(),name="DeleteEventView"),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

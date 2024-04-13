@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
-from django.views.generic import CreateView,UpdateView
+from django.views.generic import CreateView,UpdateView,ListView
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from accounts.forms import CreateuserForm,CreateEducationForm,CreateProfessionalExperienceForm
 from accounts.models import LinkedinUser,Education,ProfessionalExperience
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 class Login_view(View):
     def get(self,request):
@@ -45,7 +46,8 @@ class Register_view(View):
 class ConnectionsView(View):
     def get(self,request):
         user = get_object_or_404(LinkedinUser, username= request.user.username)
-        users = LinkedinUser.objects.filter(state=user.state,category = user.category)
+        search = Q(Q(category=user.category)| Q(state = user.state))
+        users = LinkedinUser.objects.filter(search)
         return render(request, 'connections.html', {'users':users})
     
 class AddEducationView(CreateView):
@@ -85,3 +87,19 @@ class MyProfileUpdateView(UpdateView):
     form_class = CreateuserForm  
     model = LinkedinUser
     success_url = reverse_lazy("EventsView")
+
+
+
+class ConnectionsSearchView(ListView):
+    model = LinkedinUser
+    template_name = 'connections.html'
+    context_object_name = 'users'
+    
+    def get_queryset(self):
+        users = super().get_queryset().order_by('state')
+        search = self.request.GET.get('search')
+        print(search,"hi")
+        if search:
+            users = LinkedinUser.objects.filter(username__icontains = search)
+        
+        return users
