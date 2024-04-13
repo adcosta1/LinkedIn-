@@ -36,7 +36,7 @@
 	<main>
 		<div class="container">
       <!--===================== LEFT =====================-->
-      <div class="left">
+      <a class="profile" href="{% url 'MyProfileView' pk=request.user.pk %}">
         <a class="profile">
 					<div class="profile-photo">
 						<img src="{{request.user.linkedinuser.photo.url}}">

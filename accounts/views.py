@@ -54,14 +54,14 @@ class AddEducationView(CreateView):
     success_url = reverse_lazy('EventsView')
     
     def form_valid(self, form):
-        # Define o usuário como o usuário atualmente autenticado
+       
         form.instance.userid = self.request.user.id
         user = get_object_or_404(User, pk=self.request.user.pk)
-        education_instance = form.save(commit=False)  # Salva a instância de educação do formulário
-        education_instance.save()  # Salva a instância de educação no banco de dados
-        linkedin_user = get_object_or_404(LinkedinUser, user_ptr=user)  # Encontra o LinkedinUser correspondente ao usuário
-        linkedin_user.education = education_instance  # Associa a educação ao LinkedinUser
-        linkedin_user.save()  # Salva as alterações no LinkedinUser
+        education_instance = form.save(commit=False)  
+        education_instance.save()  
+        linkedin_user = get_object_or_404(LinkedinUser, user_ptr=user)  
+        linkedin_user.education = education_instance 
+        linkedin_user.save() 
         return super().form_valid(form)
     
 class AddProfessionalExperienceView(CreateView):
@@ -70,18 +70,18 @@ class AddProfessionalExperienceView(CreateView):
     success_url = reverse_lazy('EventsView')
     
     def form_valid(self, form):
-        # Define o usuário como o usuário atualmente autenticado
+       
         form.instance.userid = self.request.user.id
         user = get_object_or_404(User, pk=self.request.user.pk)
-        professional_instance = form.save(commit=False)  # Salva a instância de educação do formulário
-        professional_instance.save()  # Salva a instância de educação no banco de dados
-        linkedin_user = get_object_or_404(LinkedinUser, user_ptr=user)  # Encontra o LinkedinUser correspondente ao usuário
-        linkedin_user.experience = professional_instance  # Associa a educação ao LinkedinUser
-        linkedin_user.save()  # Salva as alterações no LinkedinUser
+        professional_instance = form.save(commit=False) 
+        professional_instance.save()  
+        linkedin_user = get_object_or_404(LinkedinUser, user_ptr=user)  
+        linkedin_user.experience = professional_instance  
+        linkedin_user.save()  
         return super().form_valid(form)
 
 class MyProfileUpdateView(UpdateView):
     template_name = "myprofile.html"
     form_class = CreateuserForm  
     model = LinkedinUser
-    success_url = reverse_lazy("MyProfileView")
+    success_url = reverse_lazy("EventsView")

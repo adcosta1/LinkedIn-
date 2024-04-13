@@ -10,100 +10,73 @@
 
 </head>
 <body>
-   
-  <div class="sttngs">
-    <h2>SETTINGS</h2>
-<div class="tabordion">
-  <section id="section1">
-    <input class="t" type="radio" name="sections" id="option1" checked>
-    <label for="option1" class="trr"> Account</label>
-    <article>
-  
-    <div class="frm">     
-        <form method-"post" enctype="multipart/form-data">
-          {% csrf_token %}
-          {{form.as_p}}
-          <button type="submit">Update profile</button>
+  <div class="login-page">
+    <div class="form">
+      <img src="{% static "media/georgia-logo.jpg" %}">
+
+      <form method="post">
+        {% csrf_token %}
+        <h2>Update Profile</h2>
+        <div class="form-container">
+          <div class="column">
+            <label for="photo"><strong>Photo</strong></label>
+            {{form.photo}}
+            <br>
+            <label for="username"><strong>Username</strong></label>
+            {{ form.username }}
+            <br>
+            <label for="first_name"><strong>First Name</strong></label>
+            {{ form.first_name }}
+            <br>
+            <label for="Last_name"><strong>Last Name</strong></label>
+            {{ form.last_name }}
+            <br>
+            <label for="gender"><strong>Gender</strong></label>
+            {{ form.gender }}
+            <br>
+            <label for="Category"><strong>Category</strong></label>
+            {{ form.category }}
+            <br>
+
+          </div>
+          
+          <div class="column">
+            
+            
+            <label for="state"><strong>state</strong></label>
+            {{ form.state }}
+            <br>
+            <br>
+            <label for="Race"><strong>Race</strong></label>
+            {{ form.Race }}
+            <br>
+
+            <label for="email"><strong>email</strong></label>
+            {{ form.email }}
+            <br>
+            <label for="DOB"><strong>Birthday</strong></label>
+            {{ form.DOB }}
+            <br>
+            <label for="Bio"><strong>Bio</strong></label>
+            {{ form.Bio }}
+            <br>
+            <label for="password1"><strong>Password</strong></label>
+            {{ form.password1 }}
+            <br>
+            <label for="password2"><strong>Repeat Password</strong></label>
+            {{ form.password2 }}
+            <br>
+            
+            <!-- outros campos do formulário aqui -->
+          </div>
+        </div>
+        
+        <button class="btn btn-primary">Update</button>
         </form>
-
-  
-      
-   
-</div>
-  
-  
+    </div>
   </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-  $("document").ready(function () {
-
-    var textmax=500;
-   
-    $("#count").text(textmax + ' character left');
-    
-    $("#bio").keyup(function(){
-        
-        var userlenght= $("#bio").val().length;
-        
-        var remain= textmax - userlenght ;
-
-        $("#count").text(remain + ' characters left');
-        
-    });
-    
-});
-
-
-
-
-
-document.getElementById('getval').addEventListener('change', readURL, true);
-function readURL(){
-    var file = document.getElementById("getval").files[0];
-    var reader = new FileReader();
-    reader.onloadend = function(){
-        document.getElementById('profile-upload').style.backgroundImage = "url(" + reader.result + ")";        
-    }
-    if(file){
-        reader.readAsDataURL(file);
-    }else{
-    }
-}
-
-
-
-
-
-
-
-
-
-$(function () {
-  var $text = $('#texte');
-  var $input = $('.texte');
-  $input.on('keydown', function () {
-    setTimeout(function () {
-      $text.html($input.val());
-    }, 0);
-  });
-})
-</script>
+  
   
 </body>
 </html>
-{%endblock%}
+{% endblock %}
