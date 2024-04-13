@@ -32,6 +32,7 @@ class JobsView(LoginRequiredMixin,View):
         user = get_object_or_404(LinkedinUser, username= request.user.username )
         search = Q(Q(category=user.category))
         jobs = Job.objects.filter(search)
+        jobs = reversed(jobs)
         form = PublishJobForm()
         return render(request, 'jobs.html',{'jobs':jobs, 'form':form})
     

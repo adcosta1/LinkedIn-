@@ -15,6 +15,7 @@ class EventsView(LoginRequiredMixin,View):
 
         search = Q(Q(category=user.category) | Q(organizer__state=user.state))
         events = Events.objects.filter(search)
+        events = reversed(events)
         form = CreateEventForm()
         return render(request, 'event.html',{'events':events, 'form':form})
     
@@ -28,6 +29,7 @@ class EventsView(LoginRequiredMixin,View):
         user = get_object_or_404(LinkedinUser, username= request.user.username )
         search = Q(Q(category=user.category) | Q(organizer__state=user.state))
         events = Events.objects.filter(search)
+        events = reversed(events)
         form = CreateEventForm()
         return render(request, 'event.html',{'events':events, 'form':form})
 
