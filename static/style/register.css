@@ -161,3 +161,8 @@ body {
 .column {
   margin: 10px;
 }
+
+form button{
+  display: flex;
+  flex-direction: column;
+}

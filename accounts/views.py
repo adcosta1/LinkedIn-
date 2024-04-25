@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import CreateView,UpdateView,ListView
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
-from accounts.forms import CreateuserForm,CreateEducationForm,CreateProfessionalExperienceForm
+from accounts.forms import CreateuserForm,CreateEducationForm,CreateProfessionalExperienceForm,UpdateForm
 from accounts.models import LinkedinUser,Education,ProfessionalExperience
 from django.urls import reverse_lazy
 from django.db.models import Q
@@ -32,7 +32,6 @@ class Register_view(View):
 
     def post(self, request):
         form = CreateuserForm(request.POST,request.FILES)
-        print(form)
         print(form.is_valid())
         if form.is_valid():
             user = form.save()
@@ -85,7 +84,7 @@ class AddProfessionalExperienceView(CreateView):
 
 class MyProfileUpdateView(UpdateView):
     template_name = "myprofile.html"
-    form_class = CreateuserForm  
+    form_class = UpdateForm
     model = LinkedinUser
     success_url = reverse_lazy("EventsView")
 

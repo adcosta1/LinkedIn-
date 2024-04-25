@@ -26,6 +26,14 @@
 		  	</div>  
       </form>
 			<div class="create">
+        <a href="{% url 'AddExperienceView'%}">
+          <label class="btn btn-primary" for="create-post">Experience </label>
+        </a>
+        
+        <a href="{% url 'AddEducationView'%}">
+          <label class="btn btn-primary" for="create-post">Education</label>
+
+        </a>
 				<a href="{% url "LoginView" %}">
           <label class="btn btn-primary" for="create-post">Logout</label>
         </a>

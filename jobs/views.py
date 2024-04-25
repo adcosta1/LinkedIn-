@@ -16,7 +16,7 @@ class JobsView(LoginRequiredMixin,View):
     def get(self,request):
           
         user = get_object_or_404(LinkedinUser, username= request.user.username )
-        search = Q(Q(category=user.category))
+        search = Q(Q(category=user.category) and Q(state=user.state))
         jobs = Job.objects.filter(search)
 
         form = PublishJobForm()

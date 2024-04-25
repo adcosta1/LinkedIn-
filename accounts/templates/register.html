@@ -14,16 +14,16 @@
     <div class="form">
       <img src="{% static "media/georgia-logo.jpg" %}">
       <h2>Create your Profile</h2>
-      <form class='form-container'method="post">
+      <form class='form-container' id = "form_creation" name="form_creation" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-
+        
         <div class="column">
-          <label for="photo"><strong>Photo</strong></label>
-          {{form.photo}}
-          
-          <label for="username"><strong>Username</strong></label>
-          {{ form.username }}
-          <br>
+            <label for="photo"><strong>Photo</strong></label>
+            <input type="file" name="photo" id="photo" required>
+            
+            <label for="username"><strong>Username</strong></label>
+            {{ form.username }}
+            <br>
           <label for="first_name"><strong>First Name</strong></label>
           {{ form.first_name }}
           <br>
@@ -66,13 +66,11 @@
           <label for="password2"><strong>Repeat Password</strong></label>
           {{ form.password2 }}
           <br>
-          
-          <!-- outros campos do formulário aqui -->
         </div>
 
         
-        <button class="btn btn-primary">Create</button>
       </form>
+      <button form="form_creation" class="btn btn-primary">Create</button>
       
       <p class="message">Already registered? <a href="{% url "LoginView" %}">Sign In</a></p>
     </div>
