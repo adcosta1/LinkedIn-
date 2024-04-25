@@ -32,6 +32,7 @@ class Register_view(View):
 
     def post(self, request):
         form = CreateuserForm(request.POST,request.FILES)
+        print(form)
         print(form.is_valid())
         if form.is_valid():
             user = form.save()
